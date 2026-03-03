@@ -51,16 +51,16 @@ public class DataLoader implements CommandLineRunner {
         System.out.println(">>> Starting Data Injection...");
 
         // 2. Seed Categories
-        Category electronics = categoryRepository.save(new Category(null, "Electronics", null, null));
-        Category food = categoryRepository.save(new Category(null, "Food", null, null));
+        Category electronics = categoryRepository.save(new Category(null, "Electronics", null, null, null, null));
+        Category food = categoryRepository.save(new Category(null, "Food", null, null,null, null));
 
         // 3. Seed Products
-        Product laptop = productRepository.save(new Product(null, "MacBook", "M3 Chip", 2000.0, true, electronics, "mac.jpg", 5));
-        Product apple = productRepository.save(new Product(null, "Green Apple", "Tart and crunchy", 0.5, true, food, "apple.png", 500));
+        Product laptop = productRepository.save(new Product(null, "MacBook", "M3 Chip", 2000.0, true, electronics, "mac.jpg", 5,null, null, null, null));
+        Product apple = productRepository.save(new Product(null, "Green Apple", "Tart and crunchy", 0.5, true, food, "apple.png", 500,null, null, null, null));
 
         // 4. Seed Person (Address is saved automatically via CascadeType.ALL)
         Address adminAddress = new Address(null, "Tallinn", "Rataskaevu", "10123", "1", "Harjumaa", "Estonia");
-        Person admin = new Person(null, "Mihkel", "V", "admin@veebipood.ee", "securePass", Role.SUPERADMIN, adminAddress);
+        Person admin = new Person(null, "Mihkel", "V", "admin@veebipood.ee", "securePass", Role.SUPERADMIN, adminAddress, null, null, null, null);
         admin = personRepository.save(admin);
 
         // 5. Seed an Initial Order
