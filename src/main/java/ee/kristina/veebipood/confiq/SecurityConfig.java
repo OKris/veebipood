@@ -2,6 +2,7 @@ package ee.kristina.veebipood.confiq;
 
 import ee.kristina.veebipood.service.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -20,6 +21,9 @@ public class SecurityConfig {
 
     @Autowired
     private JwtFilter jwtFilter;
+
+    @Value("${frontend.url}")
+    private String frontendUrl;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -50,8 +54,9 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        // config.setAllowedOrigins(List.of("http://localhost:5173"));
-        config.setAllowedOrigins(List.of("*")); // RestControllerist võin ära võtta @CrossOrigin
+        config.setAllowedOrigins(List.of(frontendUrl));
+        //config.setAllowedOrigins(List.of("http://localhost:5173"));
+        //config.setAllowedOrigins(List.of("*")); // RestControllerist võin ära võtta @CrossOrigin
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         //config.setAllowCredentials(true); // take out when ws
